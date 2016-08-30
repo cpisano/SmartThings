@@ -19,7 +19,7 @@ class DashboardController extends Controller
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_URL => $url,
-            CURLOPT_USERAGENT => 'http://www.wholecrowd.com',
+            CURLOPT_USERAGENT => 'http://www.pisano.org',
             CURLOPT_HTTPHEADER => array('Authorization: Bearer ' . $token)
         ));
         // Send the request & save response to $resp
@@ -74,14 +74,11 @@ class DashboardController extends Controller
 
     	return view('dashboard', [ 'devices' => $devices, 
     			'power2' => $power2, 
-    			//'energy2' => $energy2, 
     			'power3' => $power3, 
-    			//'energy3' => $energy3, 
                 'energy2mm' =>$energy2mm,
                 'energy3mm' =>$energy3mm,
                 'energy4mm' =>$energy4mm,
     			'power4' => $power4, 
-    			//'energy4' => $energy4, 
     			'temp1' => $temp1,
     			'temp4' => $temp4,
     			'temp6' => $temp6,

@@ -27,8 +27,8 @@ Route::group(['prefix' => 'smartthings'], function () {
     Route::get('devices', 'DeviceController@get')->name('devices.get');
 
     Route::post('event', 'EventController@post')->name('event.post');
-    Route::get('event', 'EventController@post')->name('event.get');
+    Route::get('event', 'EventController@get')->name('event.get');
 
 	Route::post('register', 'RegisterController@post')->name('register.post');
-    Route::get('register', 'RegisterController@post')->name('register.get');
+    Route::get('register', 'RegisterController@get')->name('register.get');
 });

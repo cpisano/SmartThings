@@ -4,6 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Device;
+use App\Event;
+
+use App\LatestEvent;
+
+use DateTime;
+
 class EventController extends Controller
 {
     /**
@@ -23,10 +30,10 @@ class EventController extends Controller
      */
     public function get()
     {
-        return view('home');
+        return 'ok';
     }
 
-    public function post()
+    public function post(Request $request)
     {
 		//$device = [];
 
@@ -48,9 +55,9 @@ class EventController extends Controller
 		// $device['f0beeb70-6ace-11e6-bdf4-0800200c9a66'] = 270; //sunset
 
 
-		$event_input = Input::get('event');//['date'];
+		$event_input = $request->input('event');//['date'];
 
-		$event_date_raw = $event_input['date']
+		$event_date_raw = $event_input['date'];
 
 		if ($debug) {
 			// $this->logger->addInfo(trim($allPostPutVars['event']['deviceId']));
@@ -92,10 +99,14 @@ class EventController extends Controller
 		if ($description_value !== '')
 			$event_array['display'] = $description_value;		
 
-		$device->events()->save(Event::create($event_array));
-		$latest = $device->getLatestName();
+		$device->events()->save(new Event($event_array));
+		$latest = $device->getLatestName($name);
+
+		\Log::info($name . ' ' . $value);
 
 		if ($latest === null) {
+
+			\Log::info('^^^^^^------------------------------------');
 
 			$latest_array = [
 				'name' => $name,
@@ -106,10 +117,13 @@ class EventController extends Controller
 			if ($unit_value !== '')
 				$latest_array['unit'] = $unit_value;				
 
-			$device->latest()->save(Latest::create($latest_array));
+
+
+			$device->latest()->save(new LatestEvent($latest_array));
+			
 		} else {
 			$latest->value = $value;
-			$latest->date = $event_date->format('Y-m-d H:i:s')
+			$latest->date = $event_date->format('Y-m-d H:i:s');
 
 			if ($unit_value !== '')
 				$latest->unit = $unit_value;				

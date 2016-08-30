@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class LatestEvent extends Model
 {
+    public $timestamps  = false;
     /**
      * The database table used by the model.
      *
@@ -18,7 +19,7 @@ class LatestEvent extends Model
      *
      * @var array
      */
-    protected $fillable = [`device_id`, `name`, `value`, `unit`, `date`];    
+    protected $fillable = ['device_id', 'name', 'value', 'unit', 'date'];    
 
     public function events()
     {

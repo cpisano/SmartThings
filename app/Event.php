@@ -8,6 +8,7 @@ use DB;
 
 class Event extends Model
 {
+    public $timestamps  = false;
     /**
      * The database table used by the model.
      *
@@ -20,7 +21,7 @@ class Event extends Model
      *
      * @var array
      */
-    protected $fillable = [`device_id`, `name`, `value`, `unit`, `data`, `date`, `zwave`, `display`];    
+    protected $fillable = ['device_id', 'name', 'value', 'unit', 'data', 'date', 'zwave', 'display'];    
 
     public static  function getByDeviceName($device_id, $name)
     {

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Device extends Model
 {
+    public $timestamps  = false;
     /**
      * The database table used by the model.
      *
@@ -30,9 +31,9 @@ class Device extends Model
         return $this->hasMany('App\LatestEvent');
     }    
 
-    public function getLatestName()
+    public function getLatestName($name)
     {
-        return $this->latest()->where('name', '=', $this->name)->first();
+        return $this->latest()->where('name', '=', $name)->first();
     }  
 
     public static function getByUniqueId($uuid) 
