@@ -15,6 +15,13 @@ class Event extends Model
      */
     protected $table = 'event';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [`device_id`, `name`, `value`, `unit`, `data`, `date`, `zwave`, `display`];    
+
     public static  function getByDeviceName($device_id, $name)
     {
     	return self::where('device_id', '=', $device_id)->where('name', '=', $name)->where('date', '>=', '2016-08-20 00:00')->orderBy('date')->get();

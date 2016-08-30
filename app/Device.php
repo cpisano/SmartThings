@@ -24,4 +24,19 @@ class Device extends Model
     {
         return $this->hasMany('App\Event');
     }    
+
+    public function latest()
+    {
+        return $this->hasMany('App\LatestEvent');
+    }    
+
+    public function getLatestName()
+    {
+        return $this->latest()->where('name', '=', $this->name)->first();
+    }  
+
+    public static function getByUniqueId($uuid) 
+    {
+        return self::where('uuid', '=', $uuid)->first();
+    }
 }
