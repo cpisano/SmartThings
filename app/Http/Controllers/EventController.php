@@ -106,7 +106,7 @@ class EventController extends Controller
 
 		if ($latest === null) {
 
-			\Log::info('^^^^^^------------------------------------');
+			\\\Log::info('^^^^^^------------------------------------');
 
 			$latest_array = [
 				'name' => $name,
